@@ -1,5 +1,6 @@
 <?php
 require_once "controllers/ProductController.php";
+require_once "controllers/UserController.php";
 /* product.name like '%string%' */
 
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
@@ -24,11 +25,38 @@ $params = explode("/", $action);
             }
         break;
         case 'login':
-                $userController->loginAction();
+            $userController->loginAction();
         break;
-     
-
-        
+        case 'checkIn':
+            $userController->checkInAction();
+        break;
+        case 'register':
+            if((!empty($_POST["nombre"])) && (!empty($_POST["email"]))&&(!empty($_POST["password"]))){                
+               $userController->registerAction($_POST["nombre"],$_POST["email"],$_POST["password"]);
+            }
+            else{
+                $userController->checkInAction("faltan datos");
+            }
+        break;
+        case 'admin':
+            $userController->adminAction();
+        break;
+        case 'logout':
+            $userController->logoutAction();
+        break;
+        case'verify':
+            $userController->verifyAction($_POST['email'], $_POST['password']);
+        break;
+        case 'insertProduct': /* var_dump($_POST,$_FILES);die(); */
+            if((!empty($_POST["precio"])) && (!empty($_POST["nombre"]))){
+                $tapiocaController->insertAction($_POST["precio"],$_POST["nombre"],$_POST["descripcion"],$_POST["coleccion"],$_POST["categoria"]);
+            }
+        break;
+        case 'modifyRol':
+            if(!empty($_POST["user"])&&!(empty($_POST["rol"]))){
+                $userController->updateAdminAction($_POST["user"],$_POST["rol"]);
+            }
+        break;
         case 'default':
             $tapiocaController->homeAction();
         break; 
