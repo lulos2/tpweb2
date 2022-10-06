@@ -1,5 +1,4 @@
 <?php 
-
 class UserModel {
     private $db;
     function __construct(){
@@ -19,25 +18,15 @@ class UserModel {
         $template->execute();
         return $template->fetchAll(PDO::FETCH_OBJ);
     }
-
     public function updateRol($id, $nuevoRol){
         $template = $this->db->prepare("UPDATE user SET rol = ? WHERE id = ?");
         $template->execute(array($nuevoRol, $id));
     }
-
     public function deleteUser($email){
         $template = $this->db->prepare("DELETE FROM user WHERE email = ?");
         $template->execute(array($email));
     }
-
-
-
-
-
-    
+   
 }
-
-
-
 
 ?>

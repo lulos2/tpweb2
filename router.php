@@ -57,6 +57,9 @@ $params = explode("/", $action);
                 $userController->updateAdminAction($_POST["user"],$_POST["rol"]);
             }
         break;
+        case 'search':
+            $tapiocaController->searchAction($_POST["search"]);
+        break;
         case 'default':
             $tapiocaController->homeAction();
         break; 

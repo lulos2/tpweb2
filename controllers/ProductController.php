@@ -63,4 +63,13 @@ class ProductController extends BaseController{
         }
     return false;
     } 
+    public function searchAction($search = null){
+        if ($search != ""){
+            $products = $this->ropaModel->searchProduct($search);
+            $this->view->showHome($products, null);
+        }
+        else{
+            $this->redirectRoute("home");
+        }
+    }
 }

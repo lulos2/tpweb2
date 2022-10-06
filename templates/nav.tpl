@@ -24,11 +24,10 @@
         {/if}
         
       </ul>
-      <form role="search" {if $smarty.get.action == "login"||$smarty.get.action == "checkIn"} hidden {else}class="d-flex" {/if} >
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <form method="POST" action="search" role="search" {if $smarty.get.action == "login"||$smarty.get.action == "checkIn"} hidden {else}class="d-flex" {/if} >
+        <input class="form-control me-2" type="search" placeholder="Search" name="search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">buscar</button>
       </form>
-     
     </div>
   </div>
 </nav>
