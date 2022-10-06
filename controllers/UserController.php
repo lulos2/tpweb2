@@ -36,7 +36,10 @@ class UserController extends BaseController{
            echo "Error: ".$e->getMessage();
         }
     }
-
+    public function checkInAction($error=null){
+            $categorias = $this->categorias->getCategorias();
+            $this->userView->showcheckIn($categorias,$error);
+        }
     public function loginAction(){
         if($this->helper->isLogged()){
             $this->redirectRoute("home");
@@ -48,10 +51,14 @@ class UserController extends BaseController{
     }
 
     public function adminAction(){
-        $categorias = $this->categorias->getCategorias();
-        $colecciones = $this->coleccionModel->getColecciones();
-        $users = $this->userModel->getUsers();
-        $this->userView->showAdmin($categorias,$colecciones,$users);
+        if($this->helper->checkAdmin()){
+            $categorias = $this->categorias->getCategorias();
+            $colecciones = $this->coleccionModel->getColecciones();
+            $users = $this->userModel->getUsers();
+            $this->userView->showAdmin($categorias,$colecciones,$users);
+        }else{
+            $this->redirectRoute("home");
+        }
     }
     public function updateAdminAction($id,$rol){
         $this->userModel->updateRol($id,$rol);
@@ -77,6 +84,7 @@ class UserController extends BaseController{
         $_SESSION['rol'] = $rol;
         $_SESSION['logged'] = $logged;
         $this->setCookies();
+        //$this->userView->showLogin("error");
         $this->redirectRoute($route);
         session_abort();
     }
@@ -87,10 +95,7 @@ class UserController extends BaseController{
         setcookie("rol",$_SESSION['rol'],time()+60*60*4,"/");    
     }
     
-    public function checkInAction($error=null){
-        $categorias = $this->categorias->getCategorias();
-        $this->userView->showcheckIn($categorias,$error);
-    }
+   
     public function logoutAction(){
         session_start();
         session_destroy();
