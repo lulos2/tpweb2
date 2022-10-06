@@ -13,7 +13,7 @@
                 <p class="card-text">{$product->descripcion}</p>
                 {/if}
                 <div class="text-end">
-                    <a href="{BASE_URL}{$product->nombre}/{$product->id}" class="btn btn-primary text-end">${$product->precio}</a>
+                    <a href="{BASE_URL}pdp/{$product->slug}/{$product->id}"name="id" class="btn btn-primary text-end">${$product->precio}</a>
                 </div>
             </div>
         </div>
