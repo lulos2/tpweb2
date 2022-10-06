@@ -28,6 +28,10 @@ class TapiocaView{
         $this->smarty->display("checkin.tpl");
 
     }
+    public function showPdp($producto){
+        $this->smarty->assign("producto",$producto[0]);
+        $this->smarty->display("pdp.tpl");
+    }
 
 }
 
