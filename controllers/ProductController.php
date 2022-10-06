@@ -27,10 +27,10 @@ class ProductController extends BaseController{
         $this->view->showHome($products,$categorias);
     }
     public function insertAction($price,$name,$description,$collection,$category){
-       /*  var_dump($_FILES);die(); */
-        $this->ropaModel->insertProduct($price,$name,$description,$this->getFilePath(),$collection,$category);
+        $slug = str_replace(" ", "-",$name);
+        $this->ropaModel->insertProduct($price,$name,$description,$this->getFilePath(),$collection,$category,$slug);
         $this->redirectRoute("home");
-    }//comparar $_files ,files y form  
+    }
     public function getFilePath(){
         if ($this->helper->checkAdmin() && $this->valid_file()){
             $filePath = "uploads/" . uniqid("", false) . "."
@@ -39,7 +39,6 @@ class ProductController extends BaseController{
             return $filePath;
         }
     }
-
     public function valid_file(){
         $file = $_FILES['img'];
         $file_name = $file['name'];
@@ -71,5 +70,9 @@ class ProductController extends BaseController{
         else{
             $this->redirectRoute("home");
         }
+    }
+    public function pdpAction($id){
+        $product = $this->ropaModel->getProductWhitCollection($id);
+        $this->view->showPdp($product);
     }
 }

@@ -12,9 +12,7 @@ $userController = new UserController();
 $action = 'home';
 if (isset($_GET['action']))
     $action = $_GET['action'];
-
-$params = explode("/", $action);
-
+    $params = explode("/", $action);
     switch ($params[0]){
         case 'home':
             if(!empty($params[2])){
@@ -47,7 +45,7 @@ $params = explode("/", $action);
         case'verify':
             $userController->verifyAction($_POST['email'], $_POST['password']);
         break;
-        case 'insertProduct': /* var_dump($_POST,$_FILES);die(); */
+        case 'insertProduct':
             if((!empty($_POST["precio"])) && (!empty($_POST["nombre"]))){
                 $tapiocaController->insertAction($_POST["precio"],$_POST["nombre"],$_POST["descripcion"],$_POST["coleccion"],$_POST["categoria"]);
             }
@@ -60,10 +58,14 @@ $params = explode("/", $action);
         case 'search':
             $tapiocaController->searchAction($_POST["search"]);
         break;
-        case 'default':
+        case 'pdp':
+            $tapiocaController->pdpAction(end($params));
+        break;
+        default:
             $tapiocaController->homeAction();
         break; 
-    }
+        }
+        
 
 
 ?>
