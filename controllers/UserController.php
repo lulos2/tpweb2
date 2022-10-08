@@ -23,23 +23,25 @@ class UserController extends BaseController{
         $this->categorias = new CategoriaModel();
         $this->coleccionModel = new ColeccionModel();
         $this->helper = new Helper();
-
     }
 
     public function registerAction($nombre, $inputEmail, $password){
         try{
             $hashPasword = password_hash($password, PASSWORD_BCRYPT);
             $this->userModel->insertUser($nombre,$inputEmail,$hashPasword);
+            $this->verifyAction($inputEmail, $password);
             $this->redirectRoute("home");
         }
         catch(Exception $e){
            echo "Error: ".$e->getMessage();
         }
     }
+
     public function checkInAction($error=null){
             $categorias = $this->categorias->getCategorias();
             $this->userView->showcheckIn($categorias,$error);
-        }
+    }
+
     public function loginAction(){
         if($this->helper->isLogged()){
             $this->redirectRoute("home");
@@ -51,21 +53,25 @@ class UserController extends BaseController{
     }
 
     public function adminAction(){
-        if($this->helper->checkAdmin()){
+        var_dump(Helper::checkAdmin());
+        if(Helper::checkAdmin()){
             $categorias = $this->categorias->getCategorias();
             $colecciones = $this->coleccionModel->getColecciones();
             $users = $this->userModel->getUsers();
             $this->userView->showAdmin($categorias,$colecciones,$users);
-        }else{
+        }
+        else{
             $this->redirectRoute("home");
         }
     }
+    
     public function updateAdminAction($id,$rol){
         $this->userModel->updateRol($id,$rol);
         $this->redirectRoute("admin");
     }
 
     public function verifyAction($email,$password){
+        if(!session_id()) session_start();
         $user = $this->userModel->getUser($email);
         $hash =  $user->passwd;
         $verified = password_verify($password,$hash);
@@ -73,44 +79,36 @@ class UserController extends BaseController{
         $name = "visitante";
         $rol = "visitor";
         $logged = false;
-        session_start();
         if($verified){
             $logged =  true;  
             $rol = $user->rol;
             $name =  $user->nombre;
-            $route = $this->helper->checkAdmin()? "admin": "home"; 
+            $route = $this->helper->checkAdmin() ? "admin" : "home";
         }
         $_SESSION['name'] = $name;
         $_SESSION['rol'] = $rol;
         $_SESSION['logged'] = $logged;
         $this->setCookies();
-        //$this->userView->showLogin("error");
+        session_commit();
         $this->redirectRoute($route);
-        session_abort();
     }
     
     private function setCookies(){
-        setcookie("name",$_SESSION['name'],time()+60*60*4,"/");
+        if(!session_id()) session_start(['read_and_close' => 'true']);
         setcookie("logged",$_SESSION['logged'],time()+60*60*4,"/");
+        setcookie("name",$_SESSION['name'],time()+60*60*4,"/");
         setcookie("rol",$_SESSION['rol'],time()+60*60*4,"/");    
     }
     
-   
     public function logoutAction(){
-        session_start();
-        session_destroy();
+        if(!session_id()) session_start();
+        foreach($_SESSION as $key => $val) unset($_SESSION[$key]);
         //for each para borrar las cookies desde el indice(key)
         foreach($_COOKIE as $key => $cookie){
-            if ($key != 'PHPSESSID')setcookie($key, null, time() - 3600, "/");
+            setcookie($key, null, time() - 3600, "/");
         }
+        session_commit();
         $this->redirectRoute("home");
     }
-
-
 }
-
-
-
-
-
 ?>
