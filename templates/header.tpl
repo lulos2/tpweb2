@@ -11,7 +11,7 @@
 <body>
 <div class="row col-12 border border-4 m-1 d-flex justify-content-start">
     <h1 class="col-4">
-        <span class="fw-bold">titulo</span>
+        <span class="fw-bold">nike</span>
     </h1>
     <h3 class="text-end"> {if $smarty.cookies.name|default}Hola pelado {$smarty.cookies.name}  {/if}</h3>    
 </div>

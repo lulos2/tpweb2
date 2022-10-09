@@ -2,11 +2,13 @@
 
 
 class ColeccionModel {
+    
     private $db;
 
     function __construct(){
          $this->db = new PDO('mysql:host=localhost;'.'dbname=tapioca;charset=utf8', 'root', '');
     }
+
     public function getColecciones(){
         $sentencia= $this->db->prepare("SELECT * FROM coleccion");
         $sentencia->execute();
@@ -14,4 +16,3 @@ class ColeccionModel {
         return $colecciones;
     }
 }
-?>

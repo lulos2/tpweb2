@@ -31,7 +31,7 @@
         <select name="coleccion" class="form-select">
           <option value="null"></option>
           {foreach from=$collections item=$collection}
-            <option value="{$collection->id}">{$collection->nombre}</option>    
+            <option value="{$collection->id_coleccion}">{$collection->nombre_coleccion}</option>    
           {/foreach}
         </select>
       </div>
@@ -43,6 +43,7 @@
     <button type="submit" class="btn btn-primary col-10 m-5">cargar producto</button>
   </fieldset>
 </form>
+
 {* -------------------------------agregar admin-------------------- *}
 {* me traigo a todos los usuarios y selecciono los que quiero darle autoridad de admin *}
 
@@ -64,10 +65,6 @@
       <button type="submit" class="btn btn-primary col-10 m-5">modificar rol</button>
     </div>
   </form>
-
-
-
-
 
 {include file="footer.tpl"}
     

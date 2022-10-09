@@ -16,7 +16,6 @@ class UserController extends BaseController{
     private $helper;
     private $coleccionModel;
 
-
     public function __construct(){
         $this->userModel = new UserModel();
         $this->userView = new TapiocaView();
@@ -53,7 +52,6 @@ class UserController extends BaseController{
     }
 
     public function adminAction(){
-        var_dump(Helper::checkAdmin());
         if(Helper::checkAdmin()){
             $categorias = $this->categorias->getCategorias();
             $colecciones = $this->coleccionModel->getColecciones();

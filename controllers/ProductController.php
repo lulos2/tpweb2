@@ -6,13 +6,12 @@ require_once "views/TapiocaView.php";
 require_once "helpers/Helper.php";
 
 class ProductController extends BaseController{
+
     private $categoriaModel;
     private $ropaModel;
     private $view;
     private $max_size;
     private $helper;
-
-    
 
     function __construct($max_size = 1000000){
         $this->categoriaModel = new CategoriaModel();
@@ -21,11 +20,13 @@ class ProductController extends BaseController{
         $this->helper = new Helper();
         $this->max_size = $max_size;
     }
+
     public function homeAction($categoria = null){
         $categorias = $this->categoriaModel->getCategorias();
         $products = (!$categoria) ? $this->ropaModel->getProductos() : $this->ropaModel->getProductsByCategory($categoria);
         $this->view->showHome($products,$categorias);
     }
+
     public function insertAction($price,$name,$description,$collection,$category){
         $slug = str_replace(" ", "-",$name);
         $this->ropaModel->insertProduct($price,$name,$description,$this->getFilePath(),$collection,$category,$slug);
@@ -50,6 +51,7 @@ class ProductController extends BaseController{
             return $filePath;
         }
     }
+
     public function valid_file(){
         $file = $_FILES['img'];
         $file_name = $file['name'];
@@ -73,6 +75,7 @@ class ProductController extends BaseController{
         }
     return false;
     } 
+
     public function searchAction($search = null){
         if ($search != ""){
             $products = $this->ropaModel->searchProduct($search);
@@ -82,9 +85,11 @@ class ProductController extends BaseController{
             $this->redirectRoute("home");
         }
     }
+    
     public function pdpAction($id){
         $product = $this->ropaModel->getProductWhitCollection($id);
         $categories = $this->categoriaModel->getCategorias();
         $this->view->showPdp($product , $categories);
     }
+
 }
