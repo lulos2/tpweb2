@@ -31,6 +31,17 @@ class ProductController extends BaseController{
         $this->ropaModel->insertProduct($price,$name,$description,$this->getFilePath(),$collection,$category,$slug);
         $this->redirectRoute("home");
     }
+
+    public function deleteAction($id){
+        if(Helper::checkAdmin()){
+            $this->ropaModel->deleteProduct($id);
+            $this->redirectRoute("home");
+        }
+        else{
+            return false;
+        }
+    }
+
     public function getFilePath(){
         if ($this->helper->checkAdmin() && $this->valid_file()){
             $filePath = "uploads/" . uniqid("", false) . "."
@@ -73,6 +84,7 @@ class ProductController extends BaseController{
     }
     public function pdpAction($id){
         $product = $this->ropaModel->getProductWhitCollection($id);
-        $this->view->showPdp($product);
+        $categories = $this->categoriaModel->getCategorias();
+        $this->view->showPdp($product , $categories);
     }
 }

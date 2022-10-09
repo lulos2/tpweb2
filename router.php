@@ -8,7 +8,6 @@ define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] 
 $tapiocaController = new ProductController();
 $userController = new UserController();
 
-
 $action = 'home';
 if (isset($_GET['action']))
     $action = $_GET['action'];
@@ -22,12 +21,15 @@ if (isset($_GET['action']))
                 $tapiocaController->homeAction();
             }
         break;
+
         case 'login':
             $userController->loginAction();
         break;
+
         case 'checkIn':
             $userController->checkInAction();
         break;
+
         case 'register':
             if((!empty($_POST["nombre"])) && (!empty($_POST["email"]))&&(!empty($_POST["password"]))){                
                $userController->registerAction($_POST["nombre"],$_POST["email"],$_POST["password"]);
@@ -36,31 +38,43 @@ if (isset($_GET['action']))
                 $userController->checkInAction("faltan datos");
             }
         break;
+
         case 'admin':
             $userController->adminAction();
         break;
+
         case 'logout':
             $userController->logoutAction();
         break;
+
         case'verify':
             $userController->verifyAction($_POST['email'], $_POST['password']);
         break;
+
         case 'insertProduct':
             if((!empty($_POST["precio"])) && (!empty($_POST["nombre"]))){
                 $tapiocaController->insertAction($_POST["precio"],$_POST["nombre"],$_POST["descripcion"],$_POST["coleccion"],$_POST["categoria"]);
             }
         break;
+
         case 'modifyRol':
             if(!empty($_POST["user"])&&!(empty($_POST["rol"]))){
                 $userController->updateAdminAction($_POST["user"],$_POST["rol"]);
             }
         break;
+
         case 'search':
             $tapiocaController->searchAction($_POST["search"]);
         break;
+
         case 'pdp':
             $tapiocaController->pdpAction(end($params));
         break;
+
+        case 'deleteProduct':
+            $tapiocaController->deleteAction(end($params));
+        break;
+
         default:
             $tapiocaController->homeAction();
         break; 
