@@ -1,7 +1,9 @@
 <?php
  
 class RopaModel {
+    
     private $db;
+    
     function __construct(){
         $this->db = new PDO('mysql:host=localhost;'.'dbname=tapioca;charset=utf8', 'root', '');
     }
@@ -21,7 +23,7 @@ class RopaModel {
     }
 
     function getProductsByCategory($category){
-        $sentencia= $this->db->prepare("SELECT id , precio , nombre , descripcion , img FROM ropa WHERE id_tipo_fk = ?");
+        $sentencia= $this->db->prepare("SELECT * FROM ropa WHERE id_tipo_fk = ?");
         $sentencia ->execute([$category]);
         $productsByCategory = $sentencia->fetchAll(PDO::FETCH_OBJ);
         return $productsByCategory;
