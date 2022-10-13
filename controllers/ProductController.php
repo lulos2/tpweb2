@@ -1,6 +1,7 @@
 <?php
 require_once "controllers/BaseController.php";
 require_once "models/CategoriaModel.php";
+require_once "models/ColeccionModel.php";
 require_once "models/RopaModel.php";
 require_once "views/TapiocaView.php";
 require_once "helpers/Helper.php";
@@ -12,12 +13,14 @@ class ProductController extends BaseController{
     private $view;
     private $max_size;
     private $helper;
+    private $coleccionModel;
 
     function __construct($max_size = 1000000){
         $this->categoriaModel = new CategoriaModel();
         $this->ropaModel = new RopaModel();
         $this->view = new TapiocaView();
         $this->helper = new Helper();
+        $this->coleccionModel = new ColeccionModel();
         $this->max_size = $max_size;
     }
 
@@ -33,10 +36,32 @@ class ProductController extends BaseController{
         $this->redirectRoute("home");
     }
 
-    public function deleteAction($id){
+    public function deleteProductAction($id){
         if(Helper::checkAdmin()){
             $this->ropaModel->deleteProduct($id);
             $this->redirectRoute("home");
+        }
+        else{
+            return false;
+        }
+    }
+    
+    public function updateProductAction($id,$precio,$nombre,$descripcion,$coleccion,$categoria){
+        if(Helper::checkAdmin()){
+            $this->ropaModel->updateProduct($id,$precio,$nombre,$descripcion,$coleccion,$categoria);
+            $this->redirectRoute("admin");
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function updateAction($id){
+        if(Helper::checkAdmin()){
+            $categories = $this->categoriaModel->getCategorias();
+            $product = $this->ropaModel->getproduct($id);
+            $colections = $this->coleccionModel->getColecciones();
+            $this->view->showUpdateProduct($product, $categories, $colections);
         }
         else{
             return false;

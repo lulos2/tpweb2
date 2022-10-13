@@ -7,7 +7,7 @@ define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] 
 
 $tapiocaController = new ProductController();
 $userController = new UserController();
-
+UserController::checkTimeOut();
 $action = 'home';
 if (isset($_GET['action']))
     $action = $_GET['action'];
@@ -72,7 +72,24 @@ if (isset($_GET['action']))
         break;
 
         case 'deleteProduct':
-            $tapiocaController->deleteAction(end($params));
+            $tapiocaController->deleteProductAction(end($params));
+        break;
+
+        case 'deleteUser':
+            $userController->deleteUserAction(end($params));
+        break;
+
+        case 'update':
+            if(!empty($params[1])&&($params[1]=='updateProduct')){
+                    $tapiocaController->updateProductAction($_POST["id"],$_POST["precio"],$_POST["nombre"],$_POST["descripcion"],$_POST["coleccion"],$_POST["categoria"]);
+            }
+            else{
+                $tapiocaController->updateAction(end($params));
+            }
+        break;
+
+        case 'updateProduct':
+            $tapiocaController->updateProductAction($_POST["id"],$_POST["precio"],$_POST["nombre"],$_POST["descripcion"],$_POST["coleccion"],$_POST["categoria"]);
         break;
 
         default:
@@ -82,4 +99,4 @@ if (isset($_GET['action']))
         
 
 
-?>
+

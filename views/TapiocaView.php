@@ -31,13 +31,19 @@ class TapiocaView{
         $this->smarty->assign("categories",$categorias);
         $this->smarty->assign("error",$error);
         $this->smarty->display("checkin.tpl");
-
     }
     
     public function showPdp($producto, $categorias){
         $this->smarty->assign("categories",$categorias);
         $this->smarty->assign("producto",$producto[0]);
         $this->smarty->display("pdp.tpl");
+    }
+
+    public function showUpdateProduct($producto, $categorias, $colecciones){
+        $this->smarty->assign("categories",$categorias);
+        $this->smarty->assign("collections",$colecciones);
+        $this->smarty->assign("product",$producto);
+        $this->smarty->display("updateProduct.tpl");
     }
 }
 

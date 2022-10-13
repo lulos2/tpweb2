@@ -16,6 +16,7 @@
                             <a href="{BASE_URL}pdp/{$product->slug}/{$product->id}"name="id" class="btn btn-primary text-end">${$product->precio}</a>
                             {if $smarty.cookies.rol|default && $smarty.cookies.rol == "admin"}
                                 <a href="{BASE_URL}deleteProduct/{$product->id}"name="id" class="btn btn-primary text-end">Borrar</a>
+                                <a href="{BASE_URL}update/{$product->id}"name="id" class="btn btn-primary text-end">modificar</a>
                             {/if}
                         </div>
                     </div>

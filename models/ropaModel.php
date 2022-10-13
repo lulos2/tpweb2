@@ -11,8 +11,15 @@ class RopaModel {
     function getProductos(){
         $sentencia= $this->db->prepare("SELECT * FROM ropa");
         $sentencia->execute();
-        $productos = $sentencia->fetchAll(PDO::FETCH_OBJ);
-        return $productos;
+        $products = $sentencia->fetchAll(PDO::FETCH_OBJ);
+        return $products;
+    }
+
+    function getProduct($id){
+        $sentencia= $this->db->prepare("SELECT * FROM ropa WHERE id = ?");
+        $sentencia->execute([$id]);
+        $product = $sentencia->fetch(PDO::FETCH_OBJ);
+        return $product;
     }
 
     function getProductWhitCollection($productId){
@@ -44,5 +51,11 @@ class RopaModel {
     public function deleteProduct($id){
         $sentencia = $this->db->prepare("DELETE  FROM ropa WHERE id = ?");
         $sentencia->execute([$id]);
+    }
+
+    public function updateProduct($id,$precio,$nombre,$descripcion,$coleccion,$categoria){
+        var_dump($id,$precio,$nombre,$descripcion,$coleccion,$categoria);
+        $sentencia = $this->db->prepare("UPDATE ropa SET precio = ?, nombre = ?, descripcion = ?, id_coleccion_fk = ?, id_tipo_fk = ? WHERE id = ?");
+        $sentencia->execute(array($precio,$nombre,$descripcion,$coleccion,$categoria,$id));
     }
 }
