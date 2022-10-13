@@ -35,6 +35,9 @@
                   {/foreach}
                 </select>
               </div>
+              <div class="col-1">
+                <label class="input-group-text" for="inputGroupFile02">coleccion</label>
+              </div>
               <div class="col-11 mb-5">
                 <select name="coleccion" class="form-select">
                   <option value="null"></option>
