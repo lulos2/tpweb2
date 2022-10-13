@@ -31,8 +31,9 @@ class ProductController extends BaseController{
     }
 
     public function insertAction($price,$name,$description,$collection,$category){
+        $img = $this->getFilePath();
         $slug = str_replace(" ", "-",$name);
-        $this->ropaModel->insertProduct($price,$name,$description,$this->getFilePath(),$collection,$category,$slug);
+        $this->ropaModel->insertProduct($price,$name,$description,$img,$collection,$category,$slug);
         $this->redirectRoute("home");
     }
 
@@ -48,7 +49,8 @@ class ProductController extends BaseController{
     
     public function updateProductAction($id,$precio,$nombre,$descripcion,$coleccion,$categoria){
         if(Helper::checkAdmin()){
-            $this->ropaModel->updateProduct($id,$precio,$nombre,$descripcion,$coleccion,$categoria);
+            $img = $this->getFilePath();
+            $this->ropaModel->updateProduct($id,$precio,$nombre,$descripcion,$coleccion,$categoria,$img);
             $this->redirectRoute("admin");
         }
         else{
@@ -70,7 +72,7 @@ class ProductController extends BaseController{
 
     public function getFilePath(){
         if ($this->helper->checkAdmin() && $this->valid_file()){
-            $filePath = "uploads/" . uniqid("", false) . "."
+            $filePath = "images/" . uniqid("", false) . "."
             . strtolower(pathinfo($_FILES['img']['name'], PATHINFO_EXTENSION));
             move_uploaded_file($_FILES['img']['tmp_name'], $filePath);
             return $filePath;

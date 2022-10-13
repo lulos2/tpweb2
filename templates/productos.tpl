@@ -4,7 +4,7 @@
         <div class="col-3 m-4 ">
             <div class="card">
             {if $product->img}  
-            <img src="{BASE_URL}images/{$product->img}" class="card-img-top" alt="{$product->nombre}">
+            <img src="{BASE_URL}{$product->img}" class="card-img-top" alt="{$product->nombre}">
             {/if}
                 <div class= "card-body">
                     <h5 class="card-title">{$product->nombre}</h5>

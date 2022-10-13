@@ -53,9 +53,8 @@ class RopaModel {
         $sentencia->execute([$id]);
     }
 
-    public function updateProduct($id,$precio,$nombre,$descripcion,$coleccion,$categoria){
-        var_dump($id,$precio,$nombre,$descripcion,$coleccion,$categoria);
-        $sentencia = $this->db->prepare("UPDATE ropa SET precio = ?, nombre = ?, descripcion = ?, id_coleccion_fk = ?, id_tipo_fk = ? WHERE id = ?");
-        $sentencia->execute(array($precio,$nombre,$descripcion,$coleccion,$categoria,$id));
+    public function updateProduct($id,$precio,$nombre,$descripcion,$coleccion,$categoria,$img){
+        $sentencia = $this->db->prepare("UPDATE ropa SET precio = ?, nombre = ?, descripcion = ?, id_coleccion_fk = ?, id_tipo_fk = ?, img = ? WHERE id = ?");
+        $sentencia->execute(array($precio,$nombre,$descripcion,$coleccion,$categoria,$img,$id));
     }
 }
