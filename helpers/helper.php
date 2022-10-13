@@ -27,7 +27,8 @@ class Helper{
             $user['logged'] = $_SESSION['logged'];
         }
         return $user;
-    }   
+    }
+
 }
 
 

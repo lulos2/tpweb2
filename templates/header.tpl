@@ -13,5 +13,5 @@
     <h1 class="col-4">
         <span class="fw-bold">nike</span>
     </h1>
-    <h3 class="text-end"> {if $smarty.cookies.name|default}Hola pelado {$smarty.cookies.name}  {/if}</h3>    
+    <h3 class="text-end"> {if $smarty.cookies.name|default}Hola {$smarty.cookies.name}  {/if}</h3>
 </div>
