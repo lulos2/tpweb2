@@ -29,10 +29,10 @@ class UserModel {
         $template->execute(array($nuevoRol, $id));
     }
     
-    public function deleteUser($email){
-        $template = $this->db->prepare("DELETE FROM user WHERE email = ?");
-        $template->execute(array($email));
+    public function deleteUser($id){
+        $template = $this->db->prepare("DELETE FROM user WHERE id = ?");
+        $template->execute(array($id));
     }
-   
+
 }
 

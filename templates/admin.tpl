@@ -1,6 +1,6 @@
 {include file="header.tpl"} 
 {include file="nav.tpl" categories=$categories}
-
+{*-------------------insert product-------------------------*}
 <form method="POST" action="insertProduct" enctype="multipart/form-data" >
   <fieldset>
     <legend class="m-4">cargar producto</legend>
@@ -44,8 +44,8 @@
   </fieldset>
 </form>
 
-{* -------------------------------agregar admin-------------------- *}
-{* me traigo a todos los usuarios y selecciono los que quiero darle autoridad de admin *}
+{* -------------------------------user panel-------------------- *}
+{* me traigo a todos los usuarios y selecciono los que quiero darle autoridad de admin o no*}
 
   <div class="col-12 text-center">
     <h3>modificar rol</h3>
@@ -55,7 +55,7 @@
       <select name="user" class="form-select">
         <option value="null"> </option>
         {foreach from=$users item=$user}
-          <option value="{$user->id}">{$user->nombre} {$user->email} {$user->rol}</option>    
+          <option value="{$user->id}">{$user->nombre} {$user->email} {$user->rol}</option>   
         {/foreach}
       </select>
       <select name="rol" class="form-select">
@@ -65,6 +65,17 @@
       <button type="submit" class="btn btn-primary col-10 m-5">modificar rol</button>
     </div>
   </form>
+  <div class="col-12 text-center">
+    <h3>borrar usuario</h3>
+  </div>
+  <div class="adminUserPanel">
+    {foreach from=$users item=$user}
+      <a href="{BASE_URL}deleteUser/{$user->id}" class="deleteButton"><button type="button" class="btn btn-danger">borrar<option value="{$user->id}">{$user->nombre} {$user->email} {$user->rol}</option></button></a>   
+    {/foreach}
+  </div>
+ 
 
+
+ 
 {include file="footer.tpl"}
     

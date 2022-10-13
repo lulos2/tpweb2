@@ -108,5 +108,17 @@ class UserController extends BaseController{
         session_commit();
         $this->redirectRoute("home");
     }
+
+    public static function checkTimeOut(){
+        if ( isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1800)) {
+            UserController::logoutAction();
+        }
+        $_SESSION['LAST_ACTIVITY'] = time();
+    }
+
+    public function deleteUserAction($id){
+        $this->userModel->deleteUser($id);
+        $this->redirectRoute("admin");
+    }
 }
 ?>
