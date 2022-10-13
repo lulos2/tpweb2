@@ -92,6 +92,20 @@ if (isset($_GET['action']))
             $tapiocaController->updateProductAction($_POST["id"],$_POST["precio"],$_POST["nombre"],$_POST["descripcion"],$_POST["coleccion"],$_POST["categoria"]);
         break;
 
+        case 'insertCategory':
+            if (!empty($_POST['newCategory'])){
+                $tapiocaController->insertCategoryAction($_POST['newCategory']);
+            }
+        break;
+
+        case 'deleteCategory':
+            $tapiocaController->deleteCategoryAction(end($params));
+        break;
+
+        case 'updateCategory':
+            $tapiocaController->modifyCategoryAction($_POST["categoryId"],$_POST["newCategory"]);
+        break;
+
         default:
             $tapiocaController->homeAction();
         break; 

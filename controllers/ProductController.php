@@ -119,4 +119,21 @@ class ProductController extends BaseController{
         $this->view->showPdp($product , $categories);
     }
 
+    public function insertCategoryAction($category){
+        $this->categoriaModel->insertCategory($category);
+        $this->redirectRoute('admin');
+    }
+
+    public function deleteCategoryAction($id){
+        if(Helper::checkAdmin()){
+            $this->categoriaModel->deleteCategory($id);
+            $this->redirectRoute("admin");
+        }
+    }
+
+    public function modifyCategoryAction($id, $newCategory){
+        $this->categoriaModel->updateCategoy($id , $newCategory);
+        $this->redirectRoute("admin");
+    }
+
 }

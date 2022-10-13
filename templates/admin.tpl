@@ -43,6 +43,39 @@
     <button type="submit" class="btn btn-primary col-10 m-5">cargar producto</button>
   </fieldset>
 </form>
+{* -------------------------------categories panel-------------------- *}
+<legend class="m-4">cargar categoria</legend>
+<form action="insertCategory" method="post">
+  <div class="mb-5">
+    <input type="text" name="newCategory" class="form-control" placeholder="nueva categoria" required>
+  </div>
+  <button type="submit" class="btn btn-primary col-10 m-5">cargar categoria</button>
+</form>
+
+<div class="col-12 text-center">
+  <h3>borrar categoria</h3>
+</div>
+<div class="adminUserPanel">
+  {foreach from=$categories item=$category}
+    <a href="{BASE_URL}deleteCategory/{$category->id}" class="deleteButton"><button type="button" class="btn btn-danger">borrar<option value="{$category->id}">{$category->nombre}</option></button></a>
+  {/foreach}
+</div>
+
+<div class="col-12 text-center">
+  <h3>modificar categoria</h3>
+</div>
+<form action="updateCategory" method="post">
+  <div class="col-11 m-5">
+    <select name="categoryId" class="form-select">
+      <option value="null"> </option>
+      {foreach from=$categories item=$category}
+        <option value="{$category->id}">{$category->nombre}</option>
+      {/foreach}
+    </select>
+    <input type="text" name="newCategory" class="form-control" placeholder="nueva categoria" required>
+    <button type="submit" class="btn btn-primary col-10 m-5">modificar categoria</button>
+  </div>
+</form>
 
 {* -------------------------------user panel-------------------- *}
 {* me traigo a todos los usuarios y selecciono los que quiero darle autoridad de admin o no*}
