@@ -4,7 +4,9 @@
 <div class="row">
   <div class="col-4 m-5">
     <figure class="figure">
-      <img src="{BASE_URL}{$producto->img}" class="figure-img img-fluid rounded" alt="{$producto->nombre}">
+      {if $producto->img|default neq null}
+        <img src="{BASE_URL}{$producto->img}" class="figure-img img-fluid rounded" alt="{$producto->nombre}">
+      {/if}
       <figcaption class="figure-caption text-center">{$producto->nombre}</figcaption>
     </figure>
   </div>

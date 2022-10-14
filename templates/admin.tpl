@@ -13,14 +13,14 @@
         <form method="POST" action="insertProduct" enctype="multipart/form-data" >
           <fieldset>
             <div class="mb-5">
-              <input type="text" name="nombre" class="form-control" placeholder="nombre">
+              <input type="text" name="nombre" class="form-control" placeholder="nombre" required>
             </div>
             <div class="mb-5">
-              <input type="text" name="descripcion" class="form-control" placeholder="descripcion">
+              <input type="text" name="descripcion" class="form-control" placeholder="descripcion" required>
             </div>
             <div class="input-group mb-5">
               <span class="input-group-text">$</span>
-              <input type="text" name="precio" class="form-control" placeholder="precio" >
+              <input type="text" name="precio" class="form-control" placeholder="precio" required>
               <span class="input-group-text">.00</span>
             </div>
             <div class="row">
@@ -29,7 +29,7 @@
               </div>
               <div class="col-11 mb-5">
                 <select name="categoria" class="form-select">
-                  <option value="null"></option>
+                  <option value = ""></option>
                   {foreach from=$categories item=$category}
                     <option value="{$category->id}">{$category->nombre}</option>
                   {/foreach}
@@ -40,7 +40,7 @@
               </div>
               <div class="col-11 mb-5">
                 <select name="coleccion" class="form-select">
-                  <option value="null"></option>
+                  <option value = ""></option>
                   {foreach from=$collections item=$collection}
                     <option value="{$collection->id_coleccion}">{$collection->nombre_coleccion}</option>
                   {/foreach}

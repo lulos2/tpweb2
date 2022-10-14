@@ -52,8 +52,11 @@ if (isset($_GET['action']))
         break;
 
         case 'insertProduct':
-            if((!empty($_POST["precio"])) && (!empty($_POST["nombre"]))){
+            if((!empty($_POST["precio"])) && (!empty($_POST["nombre"])) && (!empty($_POST["descripcion"])) && (!empty($_POST["coleccion"]))){
                 $tapiocaController->insertAction($_POST["precio"],$_POST["nombre"],$_POST["descripcion"],$_POST["coleccion"],$_POST["categoria"]);
+            }
+            else{
+                $tapiocaController->redirectRoute("admin");
             }
         break;
 
