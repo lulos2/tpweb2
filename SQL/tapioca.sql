@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 09, 2022 at 01:45 PM
+-- Generation Time: Oct 14, 2022 at 09:50 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -66,11 +66,17 @@ CREATE TABLE `ropa` (
 --
 
 INSERT INTO `ropa` (`id`, `precio`, `nombre`, `descripcion`, `img`, `id_coleccion_fk`, `id_tipo_fk`, `slug`) VALUES
-(1, 3400, 'buso gris', 'buso gris ideal para invierno los dias soleados donde hace frio pero no tanto frio', 'images.jpg', 2, 1, 'buso-gris-1'),
-(2, 3400, 'buso gris', NULL, 'images.jpg', 3, 1, 'buzo-gtis-2'),
-(3, 5000, 'pantalon cargo azul', 'descripcion descriptiva', 'download.jpg', 2, 6, 'panta-azul'),
-(7, 6000, 'sweater rojo liso mujer', 'sweater rojo ideal para pegarsela en la pera', 'sweater.rojo.jpg', NULL, NULL, 'sweter-roojo'),
-(8, 6000, 'sweater rojo liso mujer', 'sweater rojo ideal para pegarsela en la pera', 'sweater.rojo.jpg', 2, 2, 'sueweter-rojixo');
+(29, 5000, 'Pantalón jogging gris', ' Jogging friza rústica con bolsillos laterales, cintura con ojalillos y cordón chato. De tejido suave, resistente y duradero. Prenda suelta, cómoda que permite a la piel respirar.', 'images/634819af4e587.jpg', 3, 6, 'Pantalón-jogging-gris'),
+(30, 10500, ' buso gris suelto', 'buso gris de poliester fabricado en indonesia por chinoss', 'images/63486e4fc9f1c.jpg', 3, 1, 'buso-gris-suelto'),
+(31, 9300, 'buso gris liso', 'nueva descripcion', 'images/63486d0c362f8.jpg', 3, 1, 'buso-gris-liso'),
+(32, 12000, 'jean mujer', 'jean oscuro mujer ideal para salir a pasear al perro', 'images/634873cb48c3d.jpg', 4, 6, 'jean-mujer'),
+(33, 14000, 'jean hombre', 'descripcion de este gran jean', 'images/6348740eb254b.jpg', 4, 6, 'jean-hombre'),
+(34, 8000, 'sweater rojo', 'descripcion sweater rojo mujer para invierno', 'images/6348753a2c875.jpg', 3, 2, 'sweater-rojo'),
+(35, 9500, 'messi', 'gran tipo', 'images/6348755dbaebf.jpg', 2, 5, 'messi'),
+(36, 4500, 'calza gris', 'calza deportiva gris ', 'images/63487d76375cb.jpg', 2, 6, 'calza-gris'),
+(37, 5000, 'jogging', 'Jogging friza rústica con bolsillos laterales, cintura con ojalillos y cordón chato. De tejido suave, resistente y duradero. Prenda suelta, cómoda que permite a la piel respirar.', 'images/63488a24c4352.jpg', 4, 6, 'jogging'),
+(39, 15000, 'buso rojo', 'buso rojo con capucha', 'images/6348e34cbdc25.jpg', 3, 1, 'buso-rojo'),
+(40, 200, 'sweater horrible', 'el sweater mas desagradable que vas a ver en esta decada', 'images/634971cfaee17.jpg', 3, 2, 'sweater-horrible');
 
 -- --------------------------------------------------------
 
@@ -114,9 +120,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `nombre`, `email`, `passwd`, `rol`) VALUES
 (1, 'luciano', 'lulobareiss@gmail.com', '$2y$10$OItr2zoI7Ax/CqnKwWf18OoEa1ooANCC64p/w4V95VIaCXoQ9RMTe', 'admin'),
 (3, 'marcos', 'marcos@gmail', '$2y$10$EMqwoTT0KMPIqYvqWByTw.rC8dHlRff2.lcHWJm4NwXyklSPsGS.u', 'admin'),
-(8, 'flecha', 'fede@gmail.com', '$2y$10$DmIKxXTM.WXSfJ9aPeRA.up7YDzGPsLWKR7WM/244QQWQZEtpUz.O', 'user'),
-(10, 'fechita', 'fede@gmail.comm', '$2y$10$aGXMbTl3ZXbTqz9qib.0CeD40GccS7.uL1E9xNX3KKnF.AdmlKR2i', 'user'),
-(11, 'Agus god', 'etemagus@gmail.com', '$2y$10$q7BfJMWbMJbOFsitbVHUY.aR0rOjmWQEvU26FDvx4yeF0HTf5ECYK', 'admin');
+(12, 'agus', 'agus_kawa@hotmail.com', '$2y$10$AKvPQ/yveSLNlnS525R0J.r56rsIujFgS9apJ0uoPxgRhhOjfql8W', 'user'),
+(13, 'gabito', 'gabo@hotmail.com', '$2y$10$PSSW1u7ub06qP.ZcKPZzgewowWCeoWKQGu/PpcKQSieOt6wRTLaiC', 'user');
 
 --
 -- Indexes for dumped tables
@@ -163,19 +168,19 @@ ALTER TABLE `coleccion`
 -- AUTO_INCREMENT for table `ropa`
 --
 ALTER TABLE `ropa`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `tipo`
 --
 ALTER TABLE `tipo`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
