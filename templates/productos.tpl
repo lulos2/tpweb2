@@ -3,7 +3,7 @@
     {foreach from=$products item=$product}
         <div class="col-3 m-4 ">
             <div class="card">
-            {if $product->img}  
+            {if $product->img}
             <img src="{BASE_URL}{$product->img}" class="card-img-top" alt="{$product->nombre}">
             {/if}
                 <div class= "card-body">

@@ -7,7 +7,7 @@ define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] 
 
 $tapiocaController = new ProductController();
 $userController = new UserController();
-UserController::checkTimeOut();
+$userController->checkTimeOut();
 $action = 'home';
 if (isset($_GET['action']))
     $action = $_GET['action'];

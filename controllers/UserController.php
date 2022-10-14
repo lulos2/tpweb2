@@ -109,9 +109,10 @@ class UserController extends BaseController{
         $this->redirectRoute("home");
     }
 
-    public static function checkTimeOut(){
-        if ( isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1800)) {
-            UserController::logoutAction();
+    public function checkTimeOut(){
+        if(!session_id()) session_start();
+        if ( isset($_SESSION['LAST_ACTIVITY']) && ( (time() - $_SESSION['LAST_ACTIVITY']) > 1500)) {
+            $this->logoutAction();
         }
         $_SESSION['LAST_ACTIVITY'] = time();
     }
