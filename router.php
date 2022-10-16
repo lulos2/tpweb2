@@ -99,6 +99,9 @@ if (isset($_GET['action']))
             if (!empty($_POST['newCategory'])){
                 $tapiocaController->insertCategoryAction($_POST['newCategory']);
             }
+            else{
+                $tapiocaController->redirectRoute("admin");
+            }
         break;
 
         case 'deleteCategory':
@@ -106,15 +109,30 @@ if (isset($_GET['action']))
         break;
 
         case 'updateCategory':
+            if ((!empty($_POST["categoryId"]))&&(!empty($_POST["newCategory"]))){
             $tapiocaController->modifyCategoryAction($_POST["categoryId"],$_POST["newCategory"]);
+            }
+            else{
+                $tapiocaController->redirectRoute("admin");
+            }
         break;
 
         case 'insertCollection':
-            $tapiocaController->insertCollectionAction($_POST["nameCollection"],$_POST["yearCollection"],$_POST["authorCollection"],$_POST["stationCollection"]);
+            if (!empty($_POST['nameCollection'])&&(!empty($_POST['yearCollection'])&&(!empty($_POST['authorCollection']))&&(!empty($_POST['stationCollection'])))){
+                $tapiocaController->insertCollectionAction($_POST["nameCollection"],$_POST["yearCollection"],$_POST["authorCollection"],$_POST["stationCollection"]);
+            }
+            else{
+                $tapiocaController->redirectRoute("admin");
+            }
         break;
 
         case 'updateCollection':
-            $tapiocaController->updateCollectionAction($_POST["collectionId"],$_POST["nameCollection"],$_POST["yearCollection"],$_POST["authorCollection"],$_POST["stationCollection"]);
+            if ((!empty($_POST["collectionId"]))&&(!empty($_POST['nameCollection']))&&(!empty($_POST['yearCollection'])&&(!empty($_POST['authorCollection']))&&(!empty($_POST['stationCollection'])))) {
+                $tapiocaController->updateCollectionAction($_POST["collectionId"], $_POST["nameCollection"], $_POST["yearCollection"], $_POST["authorCollection"], $_POST["stationCollection"]);
+            }
+            else{
+                $tapiocaController->redirectRoute("admin");
+            }
         break;
 
         case 'deleteCollection':

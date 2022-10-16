@@ -137,8 +137,11 @@ class ProductController extends BaseController{
     }
 
     public function insertCollectionAction($nameCollection,$yearCollection,$authorCollection,$stationCollection){
-        $this->coleccionModel->insertCollection($nameCollection,$yearCollection,$authorCollection,$stationCollection);
-        $this->redirectRoute("admin");
+        if(is_int($yearCollection)) {
+            $this->coleccionModel->insertCollection($nameCollection, $yearCollection, $authorCollection, $stationCollection);
+            $this->redirectRoute("admin");
+        }
+        else $this->redirectRoute("admin");
     }
 
     public function updateCollectionAction($collectionId,$nameCollection,$yearCollection,$authorCollection,$stationCollection){
