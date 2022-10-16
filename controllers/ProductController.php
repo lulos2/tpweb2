@@ -136,4 +136,19 @@ class ProductController extends BaseController{
         $this->redirectRoute("admin");
     }
 
+    public function insertCollectionAction($nameCollection,$yearCollection,$authorCollection,$stationCollection){
+        $this->coleccionModel->insertCollection($nameCollection,$yearCollection,$authorCollection,$stationCollection);
+        $this->redirectRoute("admin");
+    }
+
+    public function updateCollectionAction($collectionId,$nameCollection,$yearCollection,$authorCollection,$stationCollection){
+        $this->coleccionModel->updateCollection($collectionId,$nameCollection,$yearCollection,$authorCollection,$stationCollection);
+        $this->redirectRoute("admin");
+    }
+
+    public function deleteCollectionAction($collectionId){
+        $this->coleccionModel->deleteCollection($collectionId);
+        $this->redirectRoute("admin");
+    }
+
 }

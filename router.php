@@ -109,6 +109,18 @@ if (isset($_GET['action']))
             $tapiocaController->modifyCategoryAction($_POST["categoryId"],$_POST["newCategory"]);
         break;
 
+        case 'insertCollection':
+            $tapiocaController->insertCollectionAction($_POST["nameCollection"],$_POST["yearCollection"],$_POST["authorCollection"],$_POST["stationCollection"]);
+        break;
+
+        case 'updateCollection':
+            $tapiocaController->updateCollectionAction($_POST["collectionId"],$_POST["nameCollection"],$_POST["yearCollection"],$_POST["authorCollection"],$_POST["stationCollection"]);
+        break;
+
+        case 'deleteCollection':
+            $tapiocaController->deleteCollectionAction(end($params));
+        break;
+
         default:
             $tapiocaController->homeAction();
         break; 
