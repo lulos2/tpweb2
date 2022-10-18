@@ -233,8 +233,9 @@
   </div>
 </div>
 {include file="footer.tpl"}
-{*------------------update collection-------------*}
 {*
-    para implementar:
-                     cuando seleccione un option del select
-                     precarge los datos en los imputs con sus valores actules*}
+    TODO
+        update collection:
+        cuando seleccione un option del select
+        precarge los datos en los imputs con sus valores actules
+*}
