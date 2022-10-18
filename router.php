@@ -1,7 +1,6 @@
 <?php
 require_once "controllers/ProductController.php";
 require_once "controllers/UserController.php";
-/* product.name like '%string%' */
 
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 
