@@ -69,26 +69,33 @@ class UserController extends BaseController{
     }
 
     public function verifyAction($email,$password){
-        if(!session_id()) session_start();
         $user = $this->userModel->getUser($email);
         $hash =  $user->passwd;
-        $verified = password_verify($password,$hash);
         $route = "login";
-        $name = "visitante";
-        $rol = "visitor";
-        $logged = false;
-        if($verified){
-            $logged =  true;  
-            $rol = $user->rol;
-            $name =  $user->nombre;
+        if(password_verify($password,$hash)){
+            $this->setSessionTrue($user);
             $route = $this->helper->checkAdmin() ? "admin" : "home";
         }
-        $_SESSION['name'] = $name;
-        $_SESSION['rol'] = $rol;
-        $_SESSION['logged'] = $logged;
+        else{
+            $this->setSessionFalse();
+        }
         $this->setCookies();
-        session_commit();
         $this->redirectRoute($route);
+    }
+
+    private function setSessionTrue($user){
+        if(!session_id()) session_start();
+        $_SESSION['name'] = $user->nombre;
+        $_SESSION['rol'] = $user->rol;
+        $_SESSION['logged'] = $logged =  true;
+        session_commit();
+    }
+    private function setSessionFalse(){
+        if(!session_id()) session_start();
+        $_SESSION['name'] = "visitante";
+        $_SESSION['rol'] = "visitor";
+        $_SESSION['logged'] = false;
+        session_commit();
     }
     
     private function setCookies(){
