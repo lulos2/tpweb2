@@ -62,7 +62,7 @@ class UserController extends BaseController{
             $this->redirectRoute("home");
         }
     }
-    
+
     public function updateAdminAction($id,$rol){
         $this->userModel->updateRol($id,$rol);
         $this->redirectRoute("admin");
@@ -90,6 +90,7 @@ class UserController extends BaseController{
         $_SESSION['logged'] = $logged =  true;
         session_commit();
     }
+
     private function setSessionFalse(){
         if(!session_id()) session_start();
         $_SESSION['name'] = "visitante";
@@ -97,14 +98,22 @@ class UserController extends BaseController{
         $_SESSION['logged'] = false;
         session_commit();
     }
-    
+
     private function setCookies(){
         if(!session_id()) session_start(['read_and_close' => 'true']);
         setcookie("logged",$_SESSION['logged'],time()+60*60*4,"/");
         setcookie("name",$_SESSION['name'],time()+60*60*4,"/");
-        setcookie("rol",$_SESSION['rol'],time()+60*60*4,"/");    
+        setcookie("rol",$_SESSION['rol'],time()+60*60*4,"/");
     }
-    
+
+    public function checkTimeOut(){
+        if(!session_id()) session_start();
+        if ( isset($_SESSION['LAST_ACTIVITY']) && ( (time() - $_SESSION['LAST_ACTIVITY']) > 1500)) {
+            $this->logoutAction();
+        }
+        $_SESSION['LAST_ACTIVITY'] = time();
+    }
+
     public function logoutAction(){
         if(!session_id()) session_start();
         foreach($_SESSION as $key => $val) unset($_SESSION[$key]);
@@ -114,14 +123,6 @@ class UserController extends BaseController{
         }
         session_commit();
         $this->redirectRoute("home");
-    }
-
-    public function checkTimeOut(){
-        if(!session_id()) session_start();
-        if ( isset($_SESSION['LAST_ACTIVITY']) && ( (time() - $_SESSION['LAST_ACTIVITY']) > 1500)) {
-            $this->logoutAction();
-        }
-        $_SESSION['LAST_ACTIVITY'] = time();
     }
 
     public function deleteUserAction($id){

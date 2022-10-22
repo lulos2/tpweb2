@@ -30,8 +30,4 @@ class CategoriaModel {
         $sentencia = $this->db->prepare("UPDATE tipo SET nombre = ? WHERE id = ?");
         $sentencia->execute([$newCategory,$id]);
     }
-
-
 }
-
-

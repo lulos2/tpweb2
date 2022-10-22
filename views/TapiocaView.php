@@ -46,5 +46,3 @@ class TapiocaView{
         $this->smarty->display("updateProduct.tpl");
     }
 }
-
-?>

@@ -33,6 +33,4 @@ class UserModel {
         $template = $this->db->prepare("DELETE FROM user WHERE id = ?");
         $template->execute(array($id));
     }
-
 }
-

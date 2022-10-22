@@ -142,7 +142,6 @@ if (isset($_GET['action']))
             $tapiocaController->homeAction();
         break; 
         }
-        
 
-
-
+        /*TODO :
+                grab the superglobals in the controller to not have functions with so many arguments */

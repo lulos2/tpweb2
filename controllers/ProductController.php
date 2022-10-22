@@ -30,11 +30,22 @@ class ProductController extends BaseController{
         $this->view->showHome($products,$categorias);
     }
 
-    public function insertAction($price,$name,$description,$collection,$category){
-        $img = $this->getFilePath();
-        $slug = str_replace(" ", "-",$name);
-        $this->ropaModel->insertProduct($price,$name,$description,$img,$collection,$category,$slug);
-        $this->redirectRoute("home");
+    public function updateAction($id){
+        if(Helper::checkAdmin()){
+            $categories = $this->categoriaModel->getCategorias();
+            $product = $this->ropaModel->getproduct($id);
+            $colections = $this->coleccionModel->getColecciones();
+            $this->view->showUpdateProduct($product, $categories, $colections);
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function pdpAction($id){
+        $product = $this->ropaModel->getProductWhitCollection($id);
+        $categories = $this->categoriaModel->getCategorias();
+        $this->view->showPdp($product , $categories);
     }
 
     public function deleteProductAction($id){
@@ -46,24 +57,19 @@ class ProductController extends BaseController{
             return false;
         }
     }
-    
+
+    public function insertAction($price,$name,$description,$collection,$category){
+        $img = $this->getFilePath();
+        $slug = str_replace(" ", "-",$name);
+        $this->ropaModel->insertProduct($price,$name,$description,$img,$collection,$category,$slug);
+        $this->redirectRoute("home");
+    }
+
     public function updateProductAction($id,$precio,$nombre,$descripcion,$coleccion,$categoria){
         if(Helper::checkAdmin()){
             $img = $this->getFilePath();
             $this->ropaModel->updateProduct($id,$precio,$nombre,$descripcion,$coleccion,$categoria,$img);
             $this->redirectRoute("admin");
-        }
-        else{
-            return false;
-        }
-    }
-
-    public function updateAction($id){
-        if(Helper::checkAdmin()){
-            $categories = $this->categoriaModel->getCategorias();
-            $product = $this->ropaModel->getproduct($id);
-            $colections = $this->coleccionModel->getColecciones();
-            $this->view->showUpdateProduct($product, $categories, $colections);
         }
         else{
             return false;
@@ -101,7 +107,7 @@ class ProductController extends BaseController{
             echo "Extension invalida";
         }
     return false;
-    } 
+    }
 
     public function searchAction($search = null){
         if ($search != ""){
@@ -111,12 +117,6 @@ class ProductController extends BaseController{
         else{
             $this->redirectRoute("home");
         }
-    }
-    
-    public function pdpAction($id){
-        $product = $this->ropaModel->getProductWhitCollection($id);
-        $categories = $this->categoriaModel->getCategorias();
-        $this->view->showPdp($product , $categories);
     }
 
     public function insertCategoryAction($category){
