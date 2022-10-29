@@ -72,12 +72,14 @@ class UserController extends BaseController{
         $user = $this->userModel->getUser($email);
         $hash =  $user->passwd;
         $route = "login";
-        if(password_verify($password,$hash)){
+        $passwordVerify = password_verify($password,$hash);
+        if(($user == false)||(!$passwordVerify)){
+            $this->redirectRoute("login");
+            die();
+        }
+        else if($passwordVerify){
             $this->setSessionTrue($user);
             $route = $this->helper->checkAdmin() ? "admin" : "home";
-        }
-        else{
-            $this->setSessionFalse();
         }
         $this->setCookies();
         $this->redirectRoute($route);
@@ -87,15 +89,7 @@ class UserController extends BaseController{
         if(!session_id()) session_start();
         $_SESSION['name'] = $user->nombre;
         $_SESSION['rol'] = $user->rol;
-        $_SESSION['logged'] = $logged =  true;
-        session_commit();
-    }
-
-    private function setSessionFalse(){
-        if(!session_id()) session_start();
-        $_SESSION['name'] = "visitante";
-        $_SESSION['rol'] = "visitor";
-        $_SESSION['logged'] = false;
+        $_SESSION['logged'] = true;
         session_commit();
     }
 
