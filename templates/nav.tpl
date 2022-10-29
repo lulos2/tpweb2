@@ -12,7 +12,6 @@
           <a class="nav-link active" aria-current="page" href="{BASE_URL}home">home</a>
         </li>
         {foreach from=$categories item=$category}
-            
         <li class="nav-item">
           <a class="nav-link" href="{BASE_URL}home/{$category->nombre}/{$category->id}">{$category->nombre}</a>
         </li>
@@ -22,7 +21,6 @@
           <a class="nav-link" href="{BASE_URL}admin">admin</a>
         </li>
         {/if}
-        
       </ul>
       <form method="POST" action="search" role="search" {if $smarty.get.action == "login"||$smarty.get.action == "checkIn"} hidden {else}class="d-flex" {/if} >
         <input class="form-control me-2" type="search" placeholder="Search" name="search" aria-label="Search">

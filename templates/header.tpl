@@ -10,8 +10,11 @@
 </head>
 <body>
 <div class="row col-12 border border-4 m-1 d-flex justify-content-start">
-    <h1 class="col-4">
-        <span class="fw-bold">nike</span>
-    </h1>
+    <lord-icon
+            src="https://cdn.lordicon.com/mrjuyheh.json"
+            trigger="hover"
+            colors="outline:#121331,primary:#231e2d,secondary:#916f10,tertiary:#ebe6ef"
+            style="width:100px;height:100px">
+    </lord-icon>
     <h3 class="text-end"> {if $smarty.cookies.name|default}Hola {$smarty.cookies.name}  {/if}</h3>
 </div>

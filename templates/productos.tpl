@@ -15,8 +15,24 @@
                         <div class="text-end">
                             <a href="{BASE_URL}pdp/{$product->slug}/{$product->id}"name="id" class="btn btn-primary text-end">${$product->precio}</a>
                             {if $smarty.cookies.rol|default && $smarty.cookies.rol == "admin"}
-                                <a href="{BASE_URL}deleteProduct/{$product->id}"name="id" class="btn btn-primary text-end">Borrar</a>
-                                <a href="{BASE_URL}update/{$product->id}"name="id" class="btn btn-primary text-end">modificar</a>
+                                <a href="{BASE_URL}update/{$product->id}"name="id">
+                                    <lord-icon
+                                            src="https://cdn.lordicon.com/alzqexpi.json"
+                                            trigger="hover"
+                                            colors="primary:#121331,secondary:#c71f16,tertiary:#ffc738,quaternary:#e8308c,quinary:#c67d53"
+                                            stroke="60"
+                                            state="hover-1"
+                                            style="width:65px;height:65px">
+                                    </lord-icon>
+                                </a>
+                                <a href="{BASE_URL}deleteProduct/{$product->id}"name="id">
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/qjwkduhc.json"
+                                        trigger="hover"
+                                        colors="primary:#646e78,secondary:#848484,tertiary:#e83a30"
+                                        style="width:65px;height:65px">
+                                    </lord-icon>
+                                </a>
                             {/if}
                         </div>
                     </div>
